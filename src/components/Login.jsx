@@ -1,11 +1,64 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Header from "./Header";
+import checkValidateData from "../utils/validate";
+import { useDispatch } from "react-redux";
+import { setAccessToken } from "../utils/authSlice";
+import api from "../utils/api";
+import { addUser } from "../utils/userSlice";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [isSignInForm, setIsSignInForm] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(null);
+
+  const email = useRef(null);
+  const name = useRef(null);
+  const password = useRef(null);
 
   const toogleSignInForm = () => {
     setIsSignInForm(!isSignInForm);
+  };
+
+  const handleButtonClick = async () => {
+    const message = checkValidateData(
+      email.current.value,
+      password.current.value,
+    );
+
+    setErrorMessage(message);
+    if (message) return;
+
+    if (isSignInForm) {
+      try {
+        const response = await api.post("/auth/login", {
+          email: email.current.value,
+          password: password.current.value,
+        });
+        dispatch(setAccessToken(response.data.access_token));
+        dispatch(addUser(response.data.user));
+        navigate("/browse");
+      } catch (error) {
+        setErrorMessage(error.response.data.message);
+      }
+    } else {
+      try {
+        const response = await api.post("/auth/signup", {
+          displayName: name.current.value,
+          email: email.current.value,
+          password: password.current.value,
+        });
+        dispatch(setAccessToken(response.data.access_token));
+        dispatch(addUser(response.data.user));
+        navigate("/browse");
+      } catch (error) {
+        setErrorMessage(
+          error.response.data.statusCode + "-" + error.response.data.message,
+        );
+      }
+    }
   };
 
   return (
@@ -23,28 +76,38 @@ const Login = () => {
       </div>
 
       <div className="flex justify-center items-center h-[80vh]">
-        <form className="relative flex flex-col p-12 bg-black/75 w-full max-w-md rounded-md text-white">
+        <form
+          onSubmit={(e) => e.preventDefault()}
+          className="relative flex flex-col p-12 bg-black/75 w-full max-w-md rounded-md text-white"
+        >
           <h1 className="text-3xl font-bold mb-7">
             {isSignInForm ? "Sign In" : "Sign Up"}
           </h1>
           {!isSignInForm && (
             <input
               type="text"
+              ref={name}
               placeholder="Full Name"
               className="p-4 my-3 bg-[#333] rounded"
             />
           )}
           <input
+            ref={email}
             type="text"
             placeholder="Email Address"
             className="p-4 my-3 bg-[#333] rounded"
           />
           <input
+            ref={password}
             type="password"
             placeholder="Password"
             className="p-4 my-3 bg-[#333] rounded"
           />
-          <button className="p-4 mt-6 mb-2 bg-red-600 rounded font-bold">
+          <p className="font-bold text-red-600 ">{errorMessage}</p>
+          <button
+            className="p-4 mt-6 mb-2 bg-red-600 rounded font-bold"
+            onClick={handleButtonClick}
+          >
             {isSignInForm ? "Sign In" : "Sign Up"}
           </button>
           <p className="p-2 m-2 cursor-pointer" onClick={toogleSignInForm}>
