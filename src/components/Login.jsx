@@ -1,16 +1,10 @@
 import { useRef, useState } from "react";
 import Header from "./Header";
 import checkValidateData from "../utils/validate";
-import { useDispatch } from "react-redux";
-import { setAccessToken } from "../utils/authSlice";
 import api from "../utils/api";
-import { addUser } from "../utils/userSlice";
-import { useNavigate } from "react-router-dom";
+import { useAuthActions } from "../hooks/useAuthActions";
 
 const Login = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
 
@@ -18,9 +12,9 @@ const Login = () => {
   const name = useRef(null);
   const password = useRef(null);
 
-  const toogleSignInForm = () => {
-    setIsSignInForm(!isSignInForm);
-  };
+  const { login } = useAuthActions();
+
+  const toogleSignInForm = () => setIsSignInForm(!isSignInForm);
 
   const handleButtonClick = async () => {
     const message = checkValidateData(
@@ -37,9 +31,7 @@ const Login = () => {
           email: email.current.value,
           password: password.current.value,
         });
-        dispatch(setAccessToken(response.data.access_token));
-        dispatch(addUser(response.data.user));
-        navigate("/browse");
+        login(response.data.user, response.data.accessToken);
       } catch (error) {
         setErrorMessage(error.response.data.message);
       }
@@ -50,9 +42,7 @@ const Login = () => {
           email: email.current.value,
           password: password.current.value,
         });
-        dispatch(setAccessToken(response.data.access_token));
-        dispatch(addUser(response.data.user));
-        navigate("/browse");
+        login(response.data.user, response.data.accessToken);
       } catch (error) {
         setErrorMessage(
           error.response.data.statusCode + "-" + error.response.data.message,

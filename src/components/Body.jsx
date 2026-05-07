@@ -1,38 +1,29 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Browse from "./Browse";
 import Login from "./Login";
-import { useDispatch } from "react-redux";
-import { useEffect } from "react";
-import api from "../utils/api";
-import { clearAccessToken, setAccessToken } from "../utils/authSlice";
-import { addUser, removeUser } from "../utils/userSlice";
+import useBootstrapAuth from "../hooks/useBootstrapAuth";
+import PublicRoute from "./PublicRoute";
+import ProtectedRoute from "./ProtectedRoute";
 
 const Body = () => {
-  const dispatch = useDispatch();
-
-  const bootStrapAuth = async () => {
-    try {
-      const res = await api.post("/auth/refresh");
-      dispatch(setAccessToken(res.data.accessToken));
-      dispatch(addUser(res.data.user));
-    } catch {
-      dispatch(removeUser());
-      dispatch(clearAccessToken());
-    }
-  };
-
-  useEffect(() => {
-    bootStrapAuth();
-  }, []);
+  useBootstrapAuth();
 
   const appRouter = createBrowserRouter([
     {
       path: "/",
-      element: <Login />,
+      element: (
+        <PublicRoute>
+          <Login />
+        </PublicRoute>
+      ),
     },
     {
       path: "/browse",
-      element: <Browse />,
+      element: (
+        <ProtectedRoute>
+          <Browse />
+        </ProtectedRoute>
+      ),
     },
   ]);
 

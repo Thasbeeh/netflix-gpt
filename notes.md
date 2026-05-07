@@ -13,6 +13,19 @@
 - Created sign in user api
 - created redux store to store access token and user
 - Implemeneted signout, clear token & user from store
+- BugFix: Sign up user displayName and profile picture restrcited on header only when logged in
+- BugFix: If the user not logged, /browse will redirect to Login page and vice-versa
+- BugFix: Unmounted bootstrap refresh api callback from header
+- Register TMDB API & craete an app & get access to access token
+- Get data from TMDB of Now playing movies list
+- Custom hook for Now Playing Movies
+- Create moviesSlice
+- Update store with movies
+- Planning for MainContainer & SecondaryContainer
+- Fecth data for Trailer video
+- Update store with Trailer video data
+- Embed youtube video and make it autoplay and mute
+- Tailwind classes to make MainContainer look awsome
 
 # Features
 
@@ -36,6 +49,8 @@
   -- config
   -- request / response
   -- useSelector() is not avail inside axios, thus use getState() to get state variable
+
+- Use AbortController to stop the network request. can be used as useEffect unmounting of function
 
 # Things I done
 
