@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { addNowPlayingMovies } from "../utils/movieSlice";
+import { addNowPlayingMovies, addTrailerVideo } from "../utils/movieSlice";
 import { useEffect } from "react";
 import api from "../utils/api";
 
@@ -7,8 +7,13 @@ const useNowPlayingMoviesData = () => {
   const dispatch = useDispatch();
 
   const getNowPlayingMoviesData = async () => {
-    const response = await api.get("/movies");
-    dispatch(addNowPlayingMovies(response.data));
+    try {
+      const response = await api.get("/movies/main");
+      dispatch(addNowPlayingMovies(response.data?.nowPlayingMovies));
+      dispatch(addTrailerVideo(response.data?.trailerVideo));
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {

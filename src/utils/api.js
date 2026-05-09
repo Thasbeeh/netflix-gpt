@@ -21,7 +21,6 @@ api.interceptors.response.use(
     const originalRequest = error.config;
 
     const excludedRoutes = ["/auth/login", "/auth/signup", "/auth/refresh"];
-
     if (
       error.response?.status === 401 &&
       !originalRequest._retry &&

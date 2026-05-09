@@ -3,3 +3,5 @@ export const LOGO =
 
 export const AVATAR =
   "https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png";
+
+export const IMG_CDN_URL = "https://image.tmdb.org/t/p/w500";
