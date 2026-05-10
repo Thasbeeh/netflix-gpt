@@ -3,6 +3,7 @@ import Header from "./Header";
 import checkValidateData from "../utils/validate";
 import api from "../utils/api";
 import { useAuthActions } from "../hooks/useAuthActions";
+import { LOGIN_PAGE_BACKGROUND } from "../utils/constants";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
@@ -61,7 +62,7 @@ const Login = () => {
         <img
           className="h-full w-full object-cover"
           alt="login-page-background"
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/fbfbf920-aae8-4f40-95f7-28cd7910f1e8/web/IN-en-20260427-TRIFECTA-perspective_5f59ca49-2de3-4727-9fdd-2aad23de56c8_large.jpg"
+          src={LOGIN_PAGE_BACKGROUND}
         />
       </div>
 
