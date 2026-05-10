@@ -33,6 +33,10 @@
 - Improved UI with Tailwind
 - Refactored custom hook of now playing movies
 - Custom hook for fetch movie sections
+- GPT Search page
+- GPT Search bar
+- Multi language feature
+- Integrate GPT API
 
 # Features
 

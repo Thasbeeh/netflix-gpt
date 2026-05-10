@@ -3,7 +3,7 @@ import Header from "./Header";
 import checkValidateData from "../utils/validate";
 import api from "../utils/api";
 import { useAuthActions } from "../hooks/useAuthActions";
-import { LOGIN_PAGE_BACKGROUND } from "../utils/constants";
+import { BG_URL } from "../utils/constants";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
@@ -62,7 +62,7 @@ const Login = () => {
         <img
           className="h-full w-full object-cover"
           alt="login-page-background"
-          src={LOGIN_PAGE_BACKGROUND}
+          src={BG_URL}
         />
       </div>
 
