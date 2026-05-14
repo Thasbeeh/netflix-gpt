@@ -36,6 +36,11 @@
 - GPT Search page
 - GPT Search bar
 - Multi language feature
+- Router for effieciency
+- Seperate page for each movie category with infine scroll
+- BugFix: Refreshing Movie section load contents page 2 onwards
+- BugFix: Limited to home page movies to max 20 for each section
+- BugFix: GPT search state change with change in route from /gpt-search
 - Integrate GPT API
 
 # Features
@@ -72,3 +77,48 @@
   -- need to move to seperate file for clean structure
 - set up redux store, slice
 - set access token in slice
+
+# Infinite Scroll
+
+- Edge cases
+  --The real complexity lies in:
+  -- Tracking current page per category
+  -- Preventing duplicate requests
+  -- Handling cached page 1 data
+  -- Resetting correctly on refresh
+  -- Ensuring each category maintains independent pagination state
+  -- Avoiding race conditions
+
+- Skeleton
+
+```
+  useEffect(() => {
+    const target = sentinelRef.current;
+    if (!target) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      const entry = entries[0];
+
+      if (entry.isIntersecting) {
+        console.log("Load next page");
+      }
+    });
+
+    observer.observe(target);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+```
+
+- From backend pass - page, results[], total_pages ✅
+- reducer functions - fetch started, fetch succeeded, fetch failed ✅
+- write fetch and update logic in front end ✅
+  -- get current page
+  -- set next page, current page + 1
+  -- dispatch fetch started
+  -- send request with category and nextPage
+  -- collect response
+  -- set fetch succeeded
+  -- If failed, dispacth fetch failed

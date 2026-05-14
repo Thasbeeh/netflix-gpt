@@ -1,11 +1,7 @@
 import { useEffect } from "react";
 import api from "../utils/api";
 import { useDispatch } from "react-redux";
-import {
-  addPopularMovies,
-  addTopRatedMovies,
-  addUpcomingMovies,
-} from "../utils/movieSlice";
+import { fetchSucceeded } from "../utils/movieSlice";
 
 const useMovieSections = () => {
   const dispatch = useDispatch();
@@ -13,14 +9,24 @@ const useMovieSections = () => {
   const getMoviesSection = async () => {
     try {
       const response = await api.get("movies/sections");
-      dispatch(addUpcomingMovies(response.data.upcomingMovies));
-      dispatch(addTopRatedMovies(response.data.topRatedMovies));
-      dispatch(addPopularMovies(response.data.popularMovies));
-    } catch (error) {
-      console.log(
-        "Failed to fetech movies section",
-        error.response?.data?.message,
+      const movieSections = [
+        "upcomingMovies",
+        "topRatedMovies",
+        "popularMovies",
+      ];
+
+      movieSections.map((category) =>
+        dispatch(
+          fetchSucceeded({
+            page: 1,
+            category: category,
+            items: response.data?.[category]?.results,
+            totalPages: response.data?.[category]?.totalPages,
+          }),
+        ),
       );
+    } catch (error) {
+      console.log("Failed to fetch movies section", error);
     }
   };
 

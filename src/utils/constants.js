@@ -14,3 +14,14 @@ export const SUPPORTED_LANGUAGES = [
   { identifier: "hi", name: "Hindi" },
   { identifier: "ml", name: "Malayalam" },
 ];
+
+export const MOVIE_CATEGORIES = [
+  {
+    key: "nowPlayingMovies",
+    title: "Now Playing",
+    apiEndPoint: "now-playing",
+  },
+  { key: "upcomingMovies", title: "Upcoming", apiEndPoint: "upcoming" },
+  { key: "topRatedMovies", title: "Top Rated", apiEndPoint: "top-rated" },
+  { key: "popularMovies", title: "Popular", apiEndPoint: "popular" },
+];

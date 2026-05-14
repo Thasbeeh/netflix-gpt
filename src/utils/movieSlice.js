@@ -1,38 +1,56 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const initialMovieState = {
+  items: [],
+  currentPage: 0,
+  totalPages: null,
+  isLoading: false,
+  hasMore: true,
+  error: null,
+  initialized: false,
+};
+
 const movieSlice = createSlice({
   name: "movie",
   initialState: {
-    nowPlayingMovies: null,
+    nowPlayingMovies: initialMovieState,
+    topRatedMovies: initialMovieState,
+    upcomingMovies: initialMovieState,
+    popularMovies: initialMovieState,
     trailerVideo: null,
-    upcomingMovies: null,
-    topRatedMovies: null,
-    popularMovies: null,
   },
   reducers: {
-    addNowPlayingMovies: (state, action) => {
-      state.nowPlayingMovies = action.payload;
+    fetchStarted(state, action) {
+      const category = action.payload.category;
+
+      state[category].isLoading = true;
+      state[category].error = null;
     },
-    addTrailerVideo: (state, action) => {
+    fetchSucceeded(state, action) {
+      const { page, items, totalPages, category } = action.payload;
+
+      if (page === 1) state[category].items = items;
+      else state[category].items.push(...items);
+
+      state[category].currentPage = page;
+      state[category].totalPages = totalPages;
+      state[category].isLoading = false;
+      state[category].initialized = true;
+      state[category].error = null;
+      state[category].hasMore = page < totalPages;
+    },
+    fetchFailed(state, action) {
+      const { category } = action.payload;
+
+      state[category].isLoading = false;
+      state[category].error = action.payload;
+    },
+    setTrailerVideo: (state, action) => {
       state.trailerVideo = action.payload;
-    },
-    addUpcomingMovies: (state, action) => {
-      state.upcomingMovies = action.payload;
-    },
-    addTopRatedMovies: (state, action) => {
-      state.topRatedMovies = action.payload;
-    },
-    addPopularMovies: (state, action) => {
-      state.popularMovies = action.payload;
     },
   },
 });
 
-export const {
-  addNowPlayingMovies,
-  addTrailerVideo,
-  addUpcomingMovies,
-  addTopRatedMovies,
-  addPopularMovies,
-} = movieSlice.actions;
+export const { fetchStarted, fetchSucceeded, fetchFailed, setTrailerVideo } =
+  movieSlice.actions;
 export default movieSlice.reducer;
