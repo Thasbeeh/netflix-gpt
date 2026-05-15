@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import MovieList from "./MovieList";
 import useMovieSections from "../hooks/useMovieSections";
 import { MOVIE_CATEGORIES } from "../utils/constants";
+import MovieListShimmer from "./MovieListShimmer";
 
 const SecondaryContainer = () => {
   const movies = useSelector((store) => store.movie);
@@ -9,10 +10,12 @@ const SecondaryContainer = () => {
   useMovieSections();
 
   return (
-    movies && (
-      <div className="bg-black">
-        <div className="-mt-107 relative z-2 px-17 py-6">
-          {MOVIE_CATEGORIES.map((category) => {
+    <div className="bg-black">
+      <div className="-mt-107 relative z-2 px-17 py-6">
+        {!movies ? (
+          <MovieListShimmer />
+        ) : (
+          MOVIE_CATEGORIES.map((category) => {
             return (
               movies[category.key].items.length > 0 && (
                 <MovieList
@@ -21,10 +24,10 @@ const SecondaryContainer = () => {
                 />
               )
             );
-          })}
-        </div>
+          })
+        )}
       </div>
-    )
+    </div>
   );
 };
 export default SecondaryContainer;

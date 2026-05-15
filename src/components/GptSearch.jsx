@@ -8,7 +8,7 @@ const GptSearch = () => {
     <div>
       <Header />
       <div className="flex flex-col justify-center">
-        <div className="absolute inset-0 -z-10">
+        <div className="fixed inset-0 -z-10">
           <div className="absolute inset-0 bg-linear-to-b from-black via-transparent to-black/60" />
           <img
             className="h-full w-full object-cover"

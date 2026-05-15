@@ -1,10 +1,13 @@
 import { useEffect } from "react";
 import api from "../utils/api";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchSucceeded } from "../utils/movieSlice";
 
 const useMovieSections = () => {
   const dispatch = useDispatch();
+  const { upcomingMovies, popularMovies, topRatedMovies } = useSelector(
+    (store) => store.movie,
+  );
 
   const getMoviesSection = async () => {
     try {
@@ -31,7 +34,15 @@ const useMovieSections = () => {
   };
 
   useEffect(() => {
-    getMoviesSection();
+    if (
+      !(
+        upcomingMovies.initialized &&
+        popularMovies.initialized &&
+        topRatedMovies.initialized
+      )
+    ) {
+      getMoviesSection();
+    }
   }, []);
 };
 

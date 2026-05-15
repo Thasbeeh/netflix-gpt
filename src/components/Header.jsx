@@ -15,6 +15,7 @@ const Header = () => {
   const dispatch = useDispatch();
   const user = useSelector((store) => store.auth.user);
   const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
+  const langKey = useSelector((store) => store.config.language);
   const { logout } = useAuthActions();
   const navigate = useNavigate();
   const location = useLocation();
@@ -28,12 +29,9 @@ const Header = () => {
         state: { from: location.pathname },
       });
     }
-
     dispatch(toggleGptSearchView());
   };
-  const handleLanguageChange = (e) => {
-    dispatch(setLanguage(e.target.value));
-  };
+  const handleLanguageChange = (e) => dispatch(setLanguage(e.target.value));
 
   useEffect(() => {
     dispatch(setGptSearchView(location.pathname === "/gpt-search"));
@@ -66,6 +64,7 @@ const Header = () => {
             <select
               className="p-2 h-10 text-white font-semibold rounded-lg bg-gray-700"
               onChange={handleLanguageChange}
+              value={langKey}
             >
               {SUPPORTED_LANGUAGES.map((lang) => (
                 <option key={lang.identifier} value={lang.identifier}>

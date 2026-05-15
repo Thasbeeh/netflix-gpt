@@ -122,3 +122,22 @@
   -- collect response
   -- set fetch succeeded
   -- If failed, dispacth fetch failed
+
+- Assumptions
+  -- 4 movies categories - Now playing, popular, top rated, upcoming
+  -- From home page, page 1 result of all categories are cached into redux on initial load
+  -- On going to "Now playing/popular/top rated/upcoming" page, page 1 result which is already in cache is used to render initially. Later, as user scrolls down, page 2, 3, etc has to be appended to cache.
+
+- What to do / avoid following scenarios:
+  -- On scroll down, page should jump from 1 to 2, instead 1 to 3.
+  -- On scroll down, only next single page should be loaded, more than 1 next page should not be loaded.
+  -- Page Refresh from "Now playing/popular/top rated/upcoming", page 1 result of "Now playing/popular/top rated/upcoming" has to be loaded, it should n't start from page 2 results.
+  -- Suppose "Now playing" page 2 result loaded, then going to Popular, and scroll down, it fetches page 3 onwards instead page 2 of popular.
+
+- The real complexity lies in:
+  -- Tracking current page per category
+  -- Preventing duplicate requests
+  -- Handling cached page 1 data
+  -- Resetting correctly on refresh
+  -- Ensuring each category maintains independent pagination state
+  -- Avoiding race conditions

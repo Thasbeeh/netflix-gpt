@@ -54,7 +54,11 @@ const Body = () => {
     },
     {
       path: "/gpt-search",
-      element: <GptSearch />,
+      element: (
+        <ProtectedRoute>
+          <GptSearch />
+        </ProtectedRoute>
+      ),
     },
   ]);
 
