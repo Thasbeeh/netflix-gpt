@@ -11,10 +11,16 @@ const VideoTitle = ({ original_title, overview }) => {
           {overview}
         </p>
         <div className="my-2 md:my-4 flex items-center gap-2 md:gap-3">
-          <button className="bg-white text-black py-1 xs:py-1.5 sm:py-2 md:py-2.5 px-3 xs:px-4 sm:px-6 md:px-7 text-xs xs:text-sm sm:text-base md:text-lg font-bold rounded hover:bg-white/80 transition-all cursor-pointer flex items-center justify-center">
+          <button
+            aria-label={`Play ${original_title}`}
+            className="bg-white text-black py-1 xs:py-1.5 sm:py-2 md:py-2.5 px-3 xs:px-4 sm:px-6 md:px-7 text-xs xs:text-sm sm:text-base md:text-lg font-bold rounded hover:bg-white/80 transition-all cursor-pointer flex items-center justify-center"
+          >
             ▶ Play
           </button>
-          <button className="hidden sm:flex bg-gray-500/70 text-white py-1 xs:py-1.5 sm:py-2 md:py-2.5 px-3 xs:px-4 sm:px-6 md:px-7 text-xs xs:text-sm sm:text-base md:text-lg font-bold rounded hover:bg-gray-500/90 transition-all cursor-pointer items-center justify-center">
+          <button
+            aria-label={`More information about ${original_title}`}
+            className="hidden sm:flex bg-gray-500/70 text-white py-1 xs:py-1.5 sm:py-2 md:py-2.5 px-3 xs:px-4 sm:px-6 md:px-7 text-xs xs:text-sm sm:text-base md:text-lg font-bold rounded hover:bg-gray-500/90 transition-all cursor-pointer items-center justify-center"
+          >
             More Info
           </button>
         </div>

@@ -62,7 +62,8 @@ const Login = () => {
         <div className="absolute inset-0 bg-linear-to-b from-black via-transparent to-black/60" />
         <img
           className="h-full w-full object-cover"
-          alt="login-page-background"
+          alt=""
+          aria-hidden="true"
           src={BG_URL}
         />
       </div>
@@ -81,24 +82,27 @@ const Login = () => {
                 type="text"
                 ref={name}
                 placeholder="Full Name"
+                aria-label="Full Name"
                 className="p-4 my-2.5 bg-gray-800/80 focus:bg-gray-700/90 text-white rounded outline-none border-b-2 border-transparent focus:border-red-600 transition-all text-sm xs:text-base"
               />
             )}
             <input
               ref={email}
-              type="text"
+              type="email"
               placeholder="Email Address"
+              aria-label="Email Address"
               className="p-4 my-2.5 bg-gray-800/80 focus:bg-gray-700/90 text-white rounded outline-none border-b-2 border-transparent focus:border-red-600 transition-all text-sm xs:text-base"
             />
             <input
               ref={password}
               type="password"
               placeholder="Password"
+              aria-label="Password"
               className="p-4 my-2.5 bg-gray-800/80 focus:bg-gray-700/90 text-white rounded outline-none border-b-2 border-transparent focus:border-red-600 transition-all text-sm xs:text-base"
             />
 
-            {errorMessage && (
-              <p className="font-semibold text-red-500 text-sm mt-2">
+             {errorMessage && (
+              <p role="alert" aria-live="assertive" className="font-semibold text-red-500 text-sm mt-2">
                 {errorMessage}
               </p>
             )}
@@ -109,14 +113,15 @@ const Login = () => {
             >
               {isSignInForm ? "Sign In" : "Sign Up"}
             </button>
-            <p
-              className="text-xs xs:text-sm text-gray-400 hover:underline cursor-pointer mt-4 text-center md:text-left"
+            <button
+              type="button"
+              className="w-full text-xs xs:text-sm text-gray-400 hover:underline hover:text-white cursor-pointer mt-4 text-center md:text-left bg-transparent border-none p-0 outline-none transition-colors"
               onClick={toogleSignInForm}
             >
               {!isSignInForm
                 ? "Already registered? Sign In now"
                 : "New to Netflix? Sign Up now"}
-            </p>
+            </button>
           </form>
         </Container>
       </div>

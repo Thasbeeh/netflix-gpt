@@ -39,6 +39,7 @@ const GptSearchBar = () => {
         className="w-full sm:w-auto flex-1 min-h-12 sm:min-h-14 h-12 sm:h-14 px-4 bg-white rounded-lg text-sm xs:text-base outline-none text-black"
         type="text"
         placeholder={lang[langKey].gptSearchPlaceholder}
+        aria-label={lang[langKey].gptSearchPlaceholder}
       />
       <button
         className="w-full sm:w-auto min-h-12 sm:min-h-14 h-12 sm:h-14 px-6 sm:px-8 rounded-lg bg-red-600 hover:bg-red-700 text-white cursor-pointer text-sm xs:text-base font-semibold transition-colors flex-shrink-0"

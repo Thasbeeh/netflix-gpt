@@ -13,7 +13,8 @@ const GptSearch = () => {
         <div className="absolute inset-0 bg-linear-to-b from-black via-transparent to-black/60" />
         <img
           className="h-full w-full object-cover"
-          alt="login-page-background"
+          alt=""
+          aria-hidden="true"
           src={BG_URL}
         />
       </div>

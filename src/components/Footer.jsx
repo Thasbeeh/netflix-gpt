@@ -35,6 +35,7 @@ export const Footer = () => {
               className="group px-3 py-1.5 rounded-lg bg-neutral-950 hover:bg-neutral-900 border border-neutral-900 hover:border-neutral-700 text-neutral-400 hover:text-white text-xs xs:text-sm font-medium transition-all duration-200 flex items-center gap-2 shadow-sm shadow-black/20"
             >
               <svg
+                aria-hidden="true"
                 className="w-4 h-4 text-neutral-500 group-hover:text-red-500 transition-colors duration-200"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -57,6 +58,7 @@ export const Footer = () => {
               className="group px-3 py-1.5 rounded-lg bg-neutral-950 hover:bg-neutral-900 border border-neutral-900 hover:border-neutral-700 text-neutral-400 hover:text-white text-xs xs:text-sm font-medium transition-all duration-200 flex items-center gap-2 shadow-sm shadow-black/20"
             >
               <svg
+                aria-hidden="true"
                 className="w-4 h-4 text-neutral-500 group-hover:text-red-500 transition-colors duration-200"
                 fill="currentColor"
                 viewBox="0 0 24 24"
@@ -73,6 +75,7 @@ export const Footer = () => {
               className="group px-3 py-1.5 rounded-lg bg-neutral-950 hover:bg-neutral-900 border border-neutral-900 hover:border-neutral-700 text-neutral-400 hover:text-white text-xs xs:text-sm font-medium transition-all duration-200 flex items-center gap-2 shadow-sm shadow-black/20"
             >
               <svg
+                aria-hidden="true"
                 className="w-4 h-4 text-neutral-500 group-hover:text-red-500 transition-colors duration-200"
                 fill="currentColor"
                 viewBox="0 0 24 24"
@@ -95,6 +98,7 @@ export const Footer = () => {
                 className="py-1.5 px-3 text-xs xs:text-sm font-semibold rounded-md bg-neutral-900 hover:bg-neutral-800 focus:outline-none focus:ring-1 focus:ring-red-500 transition-colors border border-neutral-800 text-neutral-400"
                 onChange={handleLanguageChange}
                 value={langKey}
+                aria-label="Select Language"
               >
                 {SUPPORTED_LANGUAGES.map((lang) => (
                   <option

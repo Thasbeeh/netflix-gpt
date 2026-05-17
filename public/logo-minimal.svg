@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Netflix Classic Red Gradient -->
+    <linearGradient id="netflixRed" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E50914" />
+      <stop offset="100%" stop-color="#B0060E" />
+    </linearGradient>
+
+    <!-- AI Cyan Orbital Gradient -->
+    <linearGradient id="aiOrb" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#00F2FE" />
+      <stop offset="100%" stop-color="#4FACFE" />
+    </linearGradient>
+
+    <!-- Cyber-neon glow filter -->
+    <filter id="neonGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- External AI Cyber Orbit Ring (GPT Sphere) -->
+  <circle cx="256" cy="256" r="180" fill="none" stroke="url(#aiOrb)" stroke-width="16" filter="url(#neonGlow)" />
+
+  <!-- Symmetrical, Ultra-Sharp Netflix "N" inside the Orbit -->
+  <!-- Right Leg (Rendered behind diagonal) -->
+  <path d="M278 166 h44 v180 h-44 z" fill="url(#netflixRed)" />
+  
+  <!-- Diagonal Bar -->
+  <path d="M234 166 L278 346 h-44 L190 166 z" fill="#B0060E" />
+
+  <!-- Left Leg (Rendered on top for overlap depth) -->
+  <path d="M190 166 h44 v180 h-44 z" fill="url(#netflixRed)" />
+</svg>
