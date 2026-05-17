@@ -43,6 +43,8 @@
 - BugFix: GPT search state change with change in route from /gpt-search
 - Integrate GPT API
 - Responsive UI using Tailwind CSS
+- Add meta tags and accessibility
+- Deployed
 
 # Features
 
