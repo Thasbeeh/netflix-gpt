@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 
 const Browse = () => {
   return (
-    <div>
+    <div className="bg-black">
       <Header />
       <Outlet />
     </div>

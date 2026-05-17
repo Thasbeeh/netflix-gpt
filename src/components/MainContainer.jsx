@@ -5,15 +5,16 @@ import useNowPlayingMovies from "../hooks/useNowPlayingMovies";
 
 const MainContainer = () => {
   const movies = useSelector((store) => store.movie?.nowPlayingMovies?.items);
-  const mainMovie = movies[0];
 
   useNowPlayingMovies();
 
-  if (!mainMovie) return;
+  if (!movies || movies.length === 0) return null;
 
+  const mainMovie = movies[0];
   const { original_title, overview, id } = mainMovie;
+  
   return (
-    <div className="pt-[30%] bg-black md:pt-0">
+    <div className="w-full overflow-hidden relative bg-black">
       <VideoTitle original_title={original_title} overview={overview} />
       <VideoBackground movieId={id} />
     </div>

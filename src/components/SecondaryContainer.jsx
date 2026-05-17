@@ -3,6 +3,7 @@ import MovieList from "./MovieList";
 import useMovieSections from "../hooks/useMovieSections";
 import { MOVIE_CATEGORIES } from "../utils/constants";
 import MovieListShimmer from "./MovieListShimmer";
+import { Container } from "./layout/Container";
 
 const SecondaryContainer = () => {
   const movies = useSelector((store) => store.movie);
@@ -10,23 +11,27 @@ const SecondaryContainer = () => {
   useMovieSections();
 
   return (
-    <div className="bg-black">
-      <div className="-mt-107 relative z-2 px-17 py-6">
+    <div className="bg-black w-full pb-12">
+      <Container
+        maxWidth="full"
+        className="-mt-8 xs:-mt-32 sm:-mt-8 md:-mt-8 lg:-mt-30 xl:-mt-60 2xl:-mt-96 relative z-20 py-6"
+      >
         {!movies ? (
           <MovieListShimmer />
         ) : (
           MOVIE_CATEGORIES.map((category) => {
+            if (!movies[category.key].items) return
+
             return (
-              movies[category.key].items.length > 0 && (
                 <MovieList
+                  key={category.key}
                   title={category.title}
                   movies={movies[category.key].items.slice(0, 20)}
                 />
-              )
-            );
+            )
           })
         )}
-      </div>
+      </Container>
     </div>
   );
 };

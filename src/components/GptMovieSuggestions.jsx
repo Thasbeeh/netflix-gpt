@@ -9,15 +9,15 @@ const GptMovieSuggestions = () => {
 
   if (isLoading)
     return (
-      <div className="bg-black text-white px-4 pt-8 pb-16 mt-40">
+      <div className="w-full bg-black/80 text-white p-4 md:p-6 rounded-xl">
         <MovieListShimmer />
       </div>
     );
 
-  if (!movieResults || movieResults.length === 0) return;
+  if (!movieResults || movieResults.length === 0) return null;
 
   return (
-    <div className="p-4 px-15 bg-black/80 text-white pb-16 mt-40">
+    <div className="w-full bg-black/80 text-white p-4 md:p-6 rounded-xl">
       <MovieList title={lang[langKey].gptListTitle} movies={movieResults} />
     </div>
   );

@@ -42,6 +42,7 @@
 - BugFix: Limited to home page movies to max 20 for each section
 - BugFix: GPT search state change with change in route from /gpt-search
 - Integrate GPT API
+- Responsive UI using Tailwind CSS
 
 # Features
 

@@ -10,6 +10,7 @@ import { setGptSearchView, toggleGptSearchView } from "../utils/gptSlice";
 import { setLanguage } from "../utils/configSlice";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { Container } from "./layout/Container";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -38,61 +39,72 @@ const Header = () => {
   }, [location.pathname, dispatch]);
 
   return (
-    <div className="absolute w-screen px-8 py-2 bg-linear-to-b from-black z-10 flex flex-col md:flex-row justify-between">
-      <div className="flex items-center">
-        <img className="w-80 px-8 py-2" src={LOGO} alt="logo"></img>
+    <Container
+      as="header"
+      maxWidth="full"
+      className="relative lg:absolute lg:top-0 lg:left-0 z-50 py-4 lg:bg-linear-to-b lg:from-black/80 lg:via-transparent flex flex-col lg:flex-row justify-between items-center gap-6 lg:gap-0"
+    >
+      <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8 w-full lg:w-auto">
+        <img className="w-36 xs:w-44 md:w-48 xl:w-56" src={LOGO} alt="logo" />
         {user && (
-          <>
-            <Link to="/" className="text-white m-5 text-2xl hover:text-red-700">
+          <nav className="flex flex-wrap items-center justify-center gap-3 xs:gap-4 md:gap-6 text-sm xs:text-base md:text-lg font-medium">
+            <Link
+              to="/"
+              className="text-white hover:text-red-500 transition-colors"
+            >
               Home
             </Link>
             {MOVIE_CATEGORIES.map((category) => (
               <Link
-                className="text-white m-5 text-2xl hover:text-red-700"
+                className="text-white hover:text-red-500 transition-colors"
                 to={`/browse/${category.apiEndPoint}`}
                 key={category.key}
               >
                 {category.title}
               </Link>
             ))}
-          </>
+          </nav>
         )}
       </div>
       {user && (
-        <div className="flex items-center gap-4 p-2 rounded-lg w-fit">
+        <div className="flex flex-wrap items-center justify-center gap-3 xs:gap-4 lg:justify-end w-full lg:w-auto">
           {showGptSearch && (
             <select
-              className="p-2 h-10 text-white font-semibold rounded-lg bg-gray-700"
+              className="p-1.5 md:p-2 h-9 md:h-10 text-white text-xs xs:text-sm md:text-base font-semibold rounded-lg bg-gray-800/90 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 transition-colors border border-gray-600"
               onChange={handleLanguageChange}
               value={langKey}
             >
               {SUPPORTED_LANGUAGES.map((lang) => (
-                <option key={lang.identifier} value={lang.identifier}>
+                <option
+                  key={lang.identifier}
+                  value={lang.identifier}
+                  className="bg-gray-800"
+                >
                   {lang.name}
                 </option>
               ))}
             </select>
           )}
           <button
-            className="w-40 h-10 text-white font-semibold rounded-lg bg-green-500 cursor-pointer"
+            className="px-3 xs:px-4 h-9 md:h-10 text-white text-xs xs:text-sm md:text-base font-semibold rounded-lg bg-emerald-600 hover:bg-emerald-700 transition-colors cursor-pointer"
             onClick={handleGptSearchClick}
           >
             {showGptSearch ? "Exit Search" : "GPT Search"}
           </button>
           <img
-            className="w-10 h-10 rounded-md border border-gray-600 object-cover"
+            className="w-8 h-8 md:w-10 md:h-10 rounded-md border border-gray-600 object-cover"
             alt="user-avatar"
             src={user?.photoUrl ?? AVATAR}
           />
           <button
-            className="text-sm font-semibold text-white hover:text-red-500 transition-colors duration-200"
+            className="text-xs xs:text-sm md:text-base font-semibold text-white hover:text-red-500 transition-colors duration-200"
             onClick={handleSignOut}
           >
             Sign Out
           </button>
         </div>
       )}
-    </div>
+    </Container>
   );
 };
 export default Header;
