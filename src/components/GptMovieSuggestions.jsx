@@ -9,7 +9,7 @@ const GptMovieSuggestions = () => {
 
   if (isLoading)
     return (
-      <div className="w-full bg-black/80 text-white p-4 md:p-6 rounded-xl">
+      <div className="w-full bg-black/80 text-white p-4 xs:p-5 sm:p-6 md:p-8 rounded-2xl">
         <MovieListShimmer />
       </div>
     );
@@ -17,7 +17,7 @@ const GptMovieSuggestions = () => {
   if (!movieResults || movieResults.length === 0) return null;
 
   return (
-    <div className="w-full bg-black/80 text-white p-4 md:p-6 rounded-xl">
+    <div className="w-full bg-black/80 text-white p-4 xs:p-5 sm:p-6 md:p-8 rounded-2xl">
       <MovieList title={lang[langKey].gptListTitle} movies={movieResults} />
     </div>
   );

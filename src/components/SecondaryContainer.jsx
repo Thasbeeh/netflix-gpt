@@ -11,7 +11,7 @@ const SecondaryContainer = () => {
   useMovieSections();
 
   return (
-    <div className="bg-black w-full pb-12">
+    <div className="bg-black w-full">
       <Container
         maxWidth="full"
         className="-mt-8 xs:-mt-32 sm:-mt-8 md:-mt-8 lg:-mt-30 xl:-mt-60 2xl:-mt-96 relative z-20 py-6"

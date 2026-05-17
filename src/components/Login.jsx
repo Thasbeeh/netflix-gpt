@@ -5,6 +5,7 @@ import api from "../utils/api";
 import { useAuthActions } from "../hooks/useAuthActions";
 import { BG_URL } from "../utils/constants";
 import { Container } from "./layout/Container";
+import { Footer } from "./Footer";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
@@ -119,6 +120,7 @@ const Login = () => {
           </form>
         </Container>
       </div>
+      <Footer />
     </div>
   );
 };
